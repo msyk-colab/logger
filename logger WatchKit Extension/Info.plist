@@ -2,18 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>WKBackgroundModes</key>
-	<array>
-		<string></string>
-	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>YES</string>
-	<key>NSMotionUsageDescription</key>
-	<string>YES</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Workouts tracked by logger on Apple Watch will be saved to HealthKit.</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Your workout related data will be used to display your saved workouts in SpeedySloth.</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -44,6 +34,23 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Your workout related data will be used to display your saved workouts in SpeedySloth.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Workouts tracked by logger on Apple Watch will be saved to HealthKit.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>YES</string>
+	<key>NSMotionUsageDescription</key>
+	<string>YES</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
+	<key>WKBackgroundModes</key>
+	<array>
+		<string></string>
+		<string>workout-processing</string>
+	</array>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>
