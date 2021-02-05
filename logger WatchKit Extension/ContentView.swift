@@ -61,27 +61,37 @@ struct ContentView: View {
     var body: some View {
         VStack {
             ScrollView{
-                Text(self.strStatus)
-                if workoutInProgress {
-                    Text("Workout session: ON")
-                } else {
-                    Text("Workout session: OFF")
+                Group{
+                    Text(self.strStatus)
+                    if workoutInProgress {
+                        Text("Workout session: ON")
+                    } else {
+                        Text("Workout session: OFF")
+                        
+                    }
+                    
                 }
-                Picker("DAQ duration [min]", selection: $intSelectedDuration){
-                    ForEach(0 ..< valueSensingDurations.count) {
-                        Text(String(self.valueSensingDurations[$0]))
-                    }
-                }.frame(height: 40)
-                Picker("Sensing type", selection: $intSelectedTypes){
-                    ForEach(0 ..< valueSensingTypes.count) {
-                        Text(self.valueSensingTypes[$0])
-                    }
-                }.frame(height: 40)
-                Picker("DAQ interval [s]", selection: $intSelectedInterval){
-                    ForEach(0 ..< valueSensingIntervals.count) {
-                        Text(String(self.valueSensingIntervals[$0]))
-                    }
-                }.frame(height: 40)
+                Group{
+                    Text("Sensing type")
+                    Picker("Sensing type", selection: $intSelectedTypes){
+                        ForEach(0 ..< valueSensingTypes.count) {
+                            Text(self.valueSensingTypes[$0])
+                        }
+                    }.frame(height: 40)
+                    Text("CoreMotion interval[s]")
+                    Picker("DAQ interval [s]", selection: $intSelectedInterval){
+                        ForEach(0 ..< valueSensingIntervals.count) {
+                            Text(String(self.valueSensingIntervals[$0]))
+                        }
+                    }.frame(height: 40)
+                    Text("Acceleration(recordAccelerometer) duration[min]")
+                    Picker("DAQ duration [min]", selection: $intSelectedDuration){
+                        ForEach(0 ..< valueSensingDurations.count) {
+                            Text(String(self.valueSensingDurations[$0]))
+                        }
+                    }.frame(height: 40)
+                }
+                
                 
                 Button(action:{
                     if self.valueSensingTypes[self.intSelectedTypes] == "Audio" {
@@ -104,6 +114,8 @@ struct ContentView: View {
                     {
                     Text("Start DAQ")
                 }
+                
+                
                 Button(action:{
                     if self.valueSensingTypes[self.intSelectedTypes] == "Audio" {
                         self.strStatus = self.finishAudioRecording()
@@ -123,6 +135,8 @@ struct ContentView: View {
                     {
                     Text("Stop DAQ / Retrieve data")
                 }
+                
+                
                 Button(action:{
                     self.strStatus = self.fileTransfer(fileURL: self.getSensorDataFileURL(), metaData: ["":""])
                 })
@@ -156,6 +170,7 @@ struct ContentView: View {
     }
     
 
+    //Audio
     
     func getAudioFileURL() -> URL{
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -164,14 +179,7 @@ struct ContentView: View {
         //let audioURL = docsDirect.appendingPathComponent(getDateTimeString()+".m4a")
         return audioURL
     }
-    
-    func getSensorDataFileURL() -> URL{
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let docsDirect = paths[0]
-        let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
-        return fileURL
-    }
-    
+        
     func startAudioRecording()-> String{
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -220,6 +228,15 @@ struct ContentView: View {
         WCSession.default.transferFile(fileURL, metadata: metaData)
         return "File transfer initiated."
     }
+    
+    
+    func getSensorDataFileURL() -> URL{
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let docsDirect = paths[0]
+        let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
+        return fileURL
+    }
+    
     
     // Convert the seconds into seconds, minutes, hours.
     func secondsToHoursMinutesSeconds (seconds: Int) -> (Int, Int, Int) {
