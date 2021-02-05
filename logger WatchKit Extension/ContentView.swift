@@ -9,24 +9,53 @@ import SwiftUI
 import AVFoundation
 import WatchConnectivity
 
+import HealthKit
+import Combine
+
+
 var audioRecorder: AVAudioRecorder?
 var audioPlayer: AVAudioPlayer?
 var dateDAQStarted = Date()
 var dateDAQEnded = Date()
 
 struct ContentView: View {
+    /*
+    // Get the business logic from the environment.
+    @EnvironmentObject var workoutSession: WorkoutManager
     
+    // This view will show an overlay when we don't have a workout in progress.
+    @State var workoutInProgress = false
+ */
+    /*
+    let healthStore = HKHealthStore()
+    var session: HKWorkoutSession!
+     //@ObservedObject var sensor = MotionSensor()
+     //@ObservedObject var connector = PhoneConnector()
+      
+ */
+    
+    @State public var strStatus: String = "status"
+
+    //Motion
+    var valueSensingIntervals = [60,10,5.0,2.0,1.0,0.5,0.1,0.05,0.01]
+    @State private var intSelectedInterval: Int = 0
+    
+    //Acceleration(recordAccelerometer)
     var valueSensingDurations = [1, 10, 30, 60, 120, 240, 480, 720]
-    var valueSensingTypes = ["Audio", "Motion", "HeartRate", "Accel and HeartRate", "Acceleration"]
-    var valueSensingIntervals = [1.0, 2.0, 5.0, 10, 60, 0.5, 0.1, 0.05, 0.01]
+    @State private var intSelectedDuration: Int = 0
     
+    //workout
     var workoutSession: WorkoutManager
     @State var workoutInProgress = false
     
-    @State public var strStatus: String = "status"
-    @State private var intSelectedDuration: Int = 0
-    @State private var intSelectedInterval: Int = 0
+    //取得データ選択
+    var valueSensingTypes = ["Audio", "Motion", "HeartRate", "Accel and HeartRate", "Acceleration"]
+    //var Choises = ["Audio","Motion","HeartRate","Acceleration","Accel & HeartRate"]
+    //何個目か
     @State private var intSelectedTypes: Int = 0
+    //必要？
+    //@State private var strChoise: String = "MotionData"
+    
     
     
     var body: some View {
@@ -38,6 +67,22 @@ struct ContentView: View {
                 } else {
                     Text("Workout session: OFF")
                 }
+                Picker("DAQ duration [min]", selection: $intSelectedDuration){
+                    ForEach(0 ..< valueSensingDurations.count) {
+                        Text(String(self.valueSensingDurations[$0]))
+                    }
+                }.frame(height: 40)
+                Picker("Sensing type", selection: $intSelectedTypes){
+                    ForEach(0 ..< valueSensingTypes.count) {
+                        Text(self.valueSensingTypes[$0])
+                    }
+                }.frame(height: 40)
+                Picker("DAQ interval [s]", selection: $intSelectedInterval){
+                    ForEach(0 ..< valueSensingIntervals.count) {
+                        Text(String(self.valueSensingIntervals[$0]))
+                    }
+                }.frame(height: 40)
+                
                 Button(action:{
                     if self.valueSensingTypes[self.intSelectedTypes] == "Audio" {
                         self.strStatus = self.startAudioRecording()
@@ -84,21 +129,7 @@ struct ContentView: View {
                     {
                     Text("Send sensor data")
                 }
-                Picker("DAQ duration [min]", selection: $intSelectedDuration){
-                    ForEach(0 ..< valueSensingDurations.count) {
-                        Text(String(self.valueSensingDurations[$0]))
-                    }
-                }.frame(height: 40)
-                Picker("Sensing type", selection: $intSelectedTypes){
-                    ForEach(0 ..< valueSensingTypes.count) {
-                        Text(self.valueSensingTypes[$0])
-                    }
-                }.frame(height: 40)
-                Picker("DAQ interval [s]", selection: $intSelectedInterval){
-                    ForEach(0 ..< valueSensingIntervals.count) {
-                        Text(String(self.valueSensingIntervals[$0]))
-                    }
-                }.frame(height: 40)
+                
                 /*
                 Button(action:{
                     self.strStatus = self.playAudio()
