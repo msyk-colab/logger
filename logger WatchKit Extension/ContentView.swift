@@ -49,7 +49,7 @@ struct ContentView: View {
     @State var workoutInProgress = false
     
     //取得データ選択
-    var valueSensingTypes = ["Audio", "Motion", "HeartRate", "Accel and HeartRate", "Acceleration"]
+    var valueSensingTypes = ["Audio", "Motion", "HeartRate", "Accel and HeartRate", "Acceleration", "Motion and HeartRate"]
     //var Choises = ["Audio","Motion","HeartRate","Acceleration","Accel & HeartRate"]
     //何個目か
     @State private var intSelectedTypes: Int = 0
@@ -110,6 +110,12 @@ struct ContentView: View {
                     } else if self.valueSensingTypes[self.intSelectedTypes] == "Acceleration" {
                         self.strStatus = startAccelerationSensorUpdates(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
                     }
+                    else if self.valueSensingTypes[self.intSelectedTypes] == "Motion and HeartRate"{
+                        workoutSession.requestAuthorization()
+                        workoutSession.startWorkout()
+                        workoutInProgress = true
+                        self.strStatus = startMotionSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    }
                 })
                     {
                     Text("Start DAQ")
@@ -130,6 +136,11 @@ struct ContentView: View {
                         workoutInProgress = false
                     } else if self.valueSensingTypes[self.intSelectedTypes] == "Acceleration" {
                         self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    }
+                    else if self.valueSensingTypes[self.intSelectedTypes] == "Motion and HeartRate" {
+                        self.strStatus = stopMotionSensorUpdates()
+                        workoutSession.endWorkout()
+                        workoutInProgress = false
                     }
                 })
                     {
@@ -224,6 +235,7 @@ struct ContentView: View {
         return "Play audio finished."
     }
     
+    //3
     func fileTransfer(fileURL: URL, metaData: [String:String])->String{
         WCSession.default.transferFile(fileURL, metadata: metaData)
         return "File transfer initiated."
