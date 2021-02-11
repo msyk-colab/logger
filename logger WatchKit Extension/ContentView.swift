@@ -17,6 +17,11 @@ var audioRecorder: AVAudioRecorder?
 var audioPlayer: AVAudioPlayer?
 var dateDAQStarted = Date()
 var dateDAQEnded = Date()
+var three = Date()
+var six = Date()
+var nine = Date()
+var twelve = Date()
+var a = Date()
 
 struct ContentView: View {
     /*
@@ -41,7 +46,7 @@ struct ContentView: View {
     @State private var intSelectedInterval: Int = 0
     
     //Acceleration(recordAccelerometer)
-    var valueSensingDurations = [1, 10, 30, 60, 120, 240, 480, 720]
+    var valueSensingDurations = [1, 10, 12, 30, 60, 120, 240, 480, 720]
     @State private var intSelectedDuration: Int = 0
     
     //workout
@@ -148,6 +153,7 @@ struct ContentView: View {
                 }
                 
                 
+                
                 Button(action:{
                     self.strStatus = self.fileTransfer(fileURL: self.getSensorDataFileURL(), metaData: ["":""])
                 })
@@ -176,6 +182,42 @@ struct ContentView: View {
                     {
                     Text("Send audio file")
                 }
+                
+                Button(action:{
+                    self.strStatus = start(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
+                })
+                    {
+                    Text("start")
+                }
+                
+                Button(action:{
+                    self.strStatus = get(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("get")
+                }
+                
+                Button(action:{
+                    self.strStatus = self.fileTransfer(fileURL: self.getSensorDataFileURL(), metaData: ["":""])
+                })
+                    {
+                    Text("send")
+                }
+                Button(action:{
+                    self.strStatus = dedede(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("dedede")
+                }
+               /*
+                Button(action:{
+                    self.strStatus = get(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("debug")
+                }
+                */
+                
             }
         }
     }
