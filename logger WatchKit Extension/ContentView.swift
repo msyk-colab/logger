@@ -46,7 +46,7 @@ struct ContentView: View {
     @State private var intSelectedInterval: Int = 0
     
     //Acceleration(recordAccelerometer)
-    var valueSensingDurations = [1, 10, 12, 30, 60, 120, 240, 480, 720]
+    var valueSensingDurations = [1, 2, 5, 10, 12, 30, 60, 120, 240, 480, 720]
     @State private var intSelectedDuration: Int = 0
     
     //workout
@@ -68,6 +68,7 @@ struct ContentView: View {
             ScrollView{
                 Group{
                     Text(self.strStatus)
+                    Text(ManagerStatus)
                     if workoutInProgress {
                         Text("Workout session: ON")
                     } else {
@@ -191,10 +192,10 @@ struct ContentView: View {
                 }
                 
                 Button(action:{
-                    self.strStatus = get(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    self.strStatus = getsend(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                 })
                     {
-                    Text("get")
+                    Text("getsend")
                 }
                 
                 Button(action:{
