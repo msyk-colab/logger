@@ -17,11 +17,20 @@ var audioRecorder: AVAudioRecorder?
 var audioPlayer: AVAudioPlayer?
 var dateDAQStarted = Date()
 var dateDAQEnded = Date()
+var one = Date()
+var two = Date()
 var three = Date()
+var four = Date()
+var five = Date()
 var six = Date()
+var seven = Date()
+var eight = Date()
 var nine = Date()
+var ten = Date()
+var eleven = Date()
 var twelve = Date()
 var a = Date()
+var b = Date()
 
 struct ContentView: View {
     /*
@@ -205,10 +214,10 @@ struct ContentView: View {
                     Text("send")
                 }
                 Button(action:{
-                    self.strStatus = dedede(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    self.strStatus = de(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                 })
                     {
-                    Text("dedede")
+                    Text("de")
                 }
                /*
                 Button(action:{
