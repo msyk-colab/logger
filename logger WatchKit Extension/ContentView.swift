@@ -17,18 +17,6 @@ var audioRecorder: AVAudioRecorder?
 var audioPlayer: AVAudioPlayer?
 var dateDAQStarted = Date()
 var dateDAQEnded = Date()
-var one = Date()
-var two = Date()
-var three = Date()
-var four = Date()
-var five = Date()
-var six = Date()
-var seven = Date()
-var eight = Date()
-var nine = Date()
-var ten = Date()
-var eleven = Date()
-var twelve = Date()
 var a = Date()
 var b = Date()
 
@@ -77,7 +65,6 @@ struct ContentView: View {
             ScrollView{
                 Group{
                     Text(self.strStatus)
-                    Text(ManagerStatus)
                     if workoutInProgress {
                         Text("Workout session: ON")
                     } else {
@@ -146,11 +133,30 @@ struct ContentView: View {
                         workoutSession.endWorkout()
                         workoutInProgress = false
                     } else if self.valueSensingTypes[self.intSelectedTypes] == "Accel and HeartRate" {
-                        self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         workoutSession.endWorkout()
                         workoutInProgress = false
-                    } else if self.valueSensingTypes[self.intSelectedTypes] == "Acceleration" {
+                        
+                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12
+                        {
+                            self.strStatus = getsend12(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
+                        }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
+                            self.strStatus = getsend720(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
+                        }else{
                         self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                        }
+                        
+                        
+                        
+                    } else if self.valueSensingTypes[self.intSelectedTypes] == "Acceleration" {
+                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12
+                        {
+                            self.strStatus = getsend12(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
+                        }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
+                            self.strStatus = getsend720(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
+                        }else{
+                        self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                        }
+                        
                     }
                     else if self.valueSensingTypes[self.intSelectedTypes] == "Motion and HeartRate" {
                         self.strStatus = stopMotionSensorUpdates()
@@ -192,33 +198,20 @@ struct ContentView: View {
                     {
                     Text("Send audio file")
                 }
-                
+/*
                 Button(action:{
-                    self.strStatus = start(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
+                    self.strStatus = getsend720(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
                 })
                     {
-                    Text("start")
-                }
-                
-                Button(action:{
-                    self.strStatus = getsend(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
-                })
-                    {
-                    Text("getsend")
-                }
-                
-                Button(action:{
-                    self.strStatus = self.fileTransfer(fileURL: self.getSensorDataFileURL(), metaData: ["":""])
-                })
-                    {
-                    Text("send")
+                    Text("getsend720")
                 }
                 Button(action:{
-                    self.strStatus = de(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    self.strStatus = getsend12(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
                 })
                     {
-                    Text("de")
+                    Text("getsend12")
                 }
+ */
                /*
                 Button(action:{
                     self.strStatus = get(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
@@ -311,6 +304,118 @@ struct ContentView: View {
     func elapsedTimeString(elapsed: (h: Int, m: Int, s: Int)) -> String {
         return String(format: "%d:%02d:%02d", elapsed.h, elapsed.m, elapsed.s)
     }
+    
+    
+    
+    
+    
+    
+    func getsend720(durationMinutes: Double)->String {
+        dateDAQEnded = Date()
+        var stringreturn = "Acceleration data retrieve failed"
+        for i in 1..<13 {
+            a = Calendar.current.date(byAdding: .hour, value: i-1, to: dateDAQStarted)!
+            b = Calendar.current.date(byAdding: .hour, value: i, to: dateDAQStarted)!
+            print("i: \(i)")
+            print("a: \(a)")
+            print("b: \(b)")
+            if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+                stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+                //with interval \(intervalSeconds) sec"
+                let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                let docsDirect = paths[0]
+                let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+                let stringfirstline = "\(convertDateTimeString(now: a))\nTimestamp,AxelX,AxelY,AxelZ\n"
+                creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+                for (index, data) in (listCMSensorData.enumerated()) {
+                    let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                    appendDataToFile(string: stringData, fileurl: fileURL)
+                    //print(index, data)
+                }
+                //stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+            }
+        }
+        return stringreturn
+    }
+    
+
+    func getsend12(durationMinutes: Double)->String {
+        var stringreturn = "Acceleration data retrieve failed"
+        if durationMinutes == 12{
+            dateDAQEnded = Date()
+            for i in 1..<13 {
+                a = Calendar.current.date(byAdding: .minute, value: i-1, to: dateDAQStarted)!
+                b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+                print("i: \(i)")
+                print("a: \(a)")
+                print("b: \(b)")
+                if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+                    stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+                    //with interval \(intervalSeconds) sec"
+                    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                    let docsDirect = paths[0]
+                    let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+                    let stringfirstline = "\(convertDateTimeString(now: a))\nTimestamp,AxelX,AxelY,AxelZ\n"
+                    creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+                    for (index, data)  in (listCMSensorData.enumerated()) {
+                        let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                        appendDataToFile(string: stringData, fileurl: fileURL)
+                        //print(index, data)
+                        
+                    }
+                    //stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+                    
+                }
+                
+            }
+            return stringreturn
+        }else{
+            return stringreturn
+        }
+        
+    
+    }
+    
+    
+    func stopAccelerationSensorUpdates(intervalSeconds: Double)->String {
+        dateDAQEnded = Date()
+        var stringreturn = "Acceleration data retrieve failed"
+        if let listCMSensorData = sensorrecorder.accelerometerData(from: dateDAQStarted, to: dateDAQEnded){
+            stringreturn = "Acceleration data retrieved at \(convertDateTimeString(now: dateDAQEnded)) with interval \(intervalSeconds) sec"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let stringfirstline = "\(convertDateTimeString(now: dateDAQStarted))\nTimestamp,AxelX,AxelY,AxelZ\n"
+            creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+            let tol: Double = 1.0/(50*100) // intervalSeconds must be smaller than 100 [s] in this case.
+            for (index, data) in (listCMSensorData.enumerated()) {
+                if (abs(Double(index).remainder(dividingBy: intervalSeconds*50.0)) < tol) {
+                    let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                    appendDataToFile(string: stringData, fileurl: fileURL)
+                    //print(index, data)
+                }
+            }
+        }
+        return stringreturn
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
