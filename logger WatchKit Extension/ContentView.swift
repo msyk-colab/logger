@@ -136,28 +136,27 @@ struct ContentView: View {
                         workoutInProgress = false
                         print("Duration:",Double(self.valueSensingDurations[self.intSelectedDuration]))
                         
-                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12
-                        {
+                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12{
                             self.strStatus = getsend12(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
                             self.strStatus = getsend720(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                        }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 480{
+                            self.strStatus = getsend480(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else{
-                        self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                            self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }
-                        
-                        
-                        
+                    
                     } else if self.valueSensingTypes[self.intSelectedTypes] == "Acceleration" {
                         print("Duration:",Double(self.valueSensingDurations[self.intSelectedDuration]))
-                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12
-                        {
+                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12{
                             self.strStatus = getsend12(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
                             self.strStatus = getsend720(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                        }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 480{
+                            self.strStatus = getsend480(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else{
-                        self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                            self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }
-                        
                     }
                     else if self.valueSensingTypes[self.intSelectedTypes] == "Motion and HeartRate" {
                         self.strStatus = stopMotionSensorUpdates()
