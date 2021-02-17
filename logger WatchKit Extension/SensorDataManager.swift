@@ -72,10 +72,15 @@ func getsend720(intervalSeconds: Double)->String {
                 print("fail")
             }
             */
+        }else{
+            print("Acceleration data retrieve failed")
         }
     }
     return stringreturn
 }
+
+
+//func
 
 func getsend480(intervalSeconds: Double)->String {
     dateDAQEnded = Date()
@@ -86,6 +91,8 @@ func getsend480(intervalSeconds: Double)->String {
         print("i: \(i)")
         print("a: \(a)")
         print("b: \(b)")
+        
+        //
         if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
             stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
             //with interval \(intervalSeconds) sec"
@@ -94,7 +101,16 @@ func getsend480(intervalSeconds: Double)->String {
             let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
             let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
             creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
-            for (index, data) in (listCMSensorData.enumerated()) {
+            
+            /*
+            for (data) in (listCMSensorData) {
+            //Process the data.
+            NSLog(@"Sample: (%f, %f, %f)", data.acceleration.x,
+                    data.acceleration.y, data.acceleration.z);
+            }
+        */
+            //for (index, data) in (listCMSensorData.enumerated())
+            for (data) in (listCMSensorData) {
                 let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
                 appendDataToFile(string: stringData, fileurl: fileURL)
             }
@@ -127,11 +143,9 @@ func getsend12(intervalSeconds: Double)->String {
                     let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
                     appendDataToFile(string: stringData, fileurl: fileURL)
                     //print(index, data)
-                    
                 }
                 stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
                 print("stringreturn: \(stringreturn)")
-                
             }
             
         }
@@ -301,6 +315,7 @@ func getSensorDataFileURL() -> URL{
     return fileURL
 }
 
+/*
 // Called when a file is received.
 //
 func session(_ session: WCSession, didReceive file: WCSessionFile) {
@@ -322,3 +337,4 @@ func session(_ session: WCSession, didReceive file: WCSessionFile) {
     }
     
 }
+*/
