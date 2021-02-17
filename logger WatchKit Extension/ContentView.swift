@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  logger WatchKit Extension
 //
-//  Created by 水谷昌幸 on 2021/02/05.
+//  Created by msyk on 2021/02/05.
 //
 
 import SwiftUI

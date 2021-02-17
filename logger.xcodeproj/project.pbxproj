@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E676F6A25DCEE0100F347CC /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E676F6925DCEE0100F347CC /* WorkoutManager.swift */; };
+		7E676F7625DCEEED00F347CC /* SensorDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E676F7525DCEEED00F347CC /* SensorDataManager.swift */; };
+		7E676F7D25DCEF8100F347CC /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E676F7C25DCEF8100F347CC /* File.swift */; };
 		7E9912F725CD03C4000357CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9912F625CD03C4000357CE /* AppDelegate.swift */; };
 		7E9912F925CD03C4000357CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9912F825CD03C4000357CE /* SceneDelegate.swift */; };
 		7E9912FB25CD03C4000357CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9912FA25CD03C4000357CE /* ContentView.swift */; };
@@ -31,8 +34,6 @@
 		7E99135E25CD0710000357CE /* SessionDelegater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E99135C25CD070F000357CE /* SessionDelegater.swift */; };
 		7E99136A25CD07CB000357CE /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E99136925CD07CB000357CE /* CommonFunctions.swift */; };
 		7E99136B25CD07CB000357CE /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E99136925CD07CB000357CE /* CommonFunctions.swift */; };
-		7E99137225CD0A80000357CE /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E99137125CD0A80000357CE /* WorkoutManager.swift */; };
-		7E99137925CD1387000357CE /* SensorDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E99137825CD1387000357CE /* SensorDataManager.swift */; };
 		7E99138225CD16E3000357CE /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E99138125CD16E3000357CE /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7E676F6925DCEE0100F347CC /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		7E676F7525DCEEED00F347CC /* SensorDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorDataManager.swift; sourceTree = "<group>"; };
+		7E676F7C25DCEF8100F347CC /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		7E9912F325CD03C4000357CE /* logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = logger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9912F625CD03C4000357CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E9912F825CD03C4000357CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,8 +128,6 @@
 		7E99134325CD03DA000357CE /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		7E99135C25CD070F000357CE /* SessionDelegater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDelegater.swift; sourceTree = "<group>"; };
 		7E99136925CD07CB000357CE /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
-		7E99137125CD0A80000357CE /* WorkoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutManager.swift; path = "../../WatchDataLogger01/WatchDataLogger01 WatchKit Extension/WorkoutManager.swift"; sourceTree = "<group>"; };
-		7E99137825CD1387000357CE /* SensorDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorDataManager.swift; path = "../../WatchDataLogger01/WatchDataLogger01 WatchKit Extension/SensorDataManager.swift"; sourceTree = "<group>"; };
 		7E99137F25CD16E3000357CE /* logger WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "logger WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7E99138125CD16E3000357CE /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS7.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -244,9 +246,10 @@
 			isa = PBXGroup;
 			children = (
 				7E99137F25CD16E3000357CE /* logger WatchKit Extension.entitlements */,
+				7E676F6925DCEE0100F347CC /* WorkoutManager.swift */,
+				7E676F7525DCEEED00F347CC /* SensorDataManager.swift */,
+				7E676F7C25DCEF8100F347CC /* File.swift */,
 				7E99133325CD03D4000357CE /* ContentView.swift */,
-				7E99137825CD1387000357CE /* SensorDataManager.swift */,
-				7E99137125CD0A80000357CE /* WorkoutManager.swift */,
 				7E99133125CD03D4000357CE /* HostingController.swift */,
 				7E99133525CD03D4000357CE /* ExtensionDelegate.swift */,
 				7E99133725CD03D4000357CE /* NotificationController.swift */,
@@ -496,15 +499,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E676F7625DCEEED00F347CC /* SensorDataManager.swift in Sources */,
 				7E99135E25CD0710000357CE /* SessionDelegater.swift in Sources */,
 				7E99133425CD03D4000357CE /* ContentView.swift in Sources */,
-				7E99137225CD0A80000357CE /* WorkoutManager.swift in Sources */,
-				7E99137925CD1387000357CE /* SensorDataManager.swift in Sources */,
 				7E99136B25CD07CB000357CE /* CommonFunctions.swift in Sources */,
 				7E99133225CD03D4000357CE /* HostingController.swift in Sources */,
 				7E99133825CD03D4000357CE /* NotificationController.swift in Sources */,
 				7E99133625CD03D4000357CE /* ExtensionDelegate.swift in Sources */,
 				7E99133A25CD03D4000357CE /* NotificationView.swift in Sources */,
+				7E676F6A25DCEE0100F347CC /* WorkoutManager.swift in Sources */,
+				7E676F7D25DCEF8100F347CC /* File.swift in Sources */,
 				7E99133C25CD03D4000357CE /* ComplicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
