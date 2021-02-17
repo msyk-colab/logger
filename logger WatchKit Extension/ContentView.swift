@@ -18,6 +18,7 @@ var dateDAQStarted = Date()
 var dateDAQEnded = Date()
 var a = Date()
 var b = Date()
+var c: [String] = []
 
 struct ContentView: View {
     /*
@@ -135,7 +136,9 @@ struct ContentView: View {
                         workoutSession.endWorkout()
                         workoutInProgress = false
                         print("Duration:",Double(self.valueSensingDurations[self.intSelectedDuration]))
+                        self.strStatus = getsend720(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         
+                        /*
                         if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12{
                             self.strStatus = getsend12(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
@@ -145,9 +148,13 @@ struct ContentView: View {
                         }else{
                             self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }
+                        */
                     
                     } else if self.valueSensingTypes[self.intSelectedTypes] == "Acceleration" {
                         print("Duration:",Double(self.valueSensingDurations[self.intSelectedDuration]))
+                        self.strStatus = getsend720(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                        
+                        /*
                         if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12{
                             self.strStatus = getsend12(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
@@ -157,6 +164,7 @@ struct ContentView: View {
                         }else{
                             self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }
+                        */
                     }
                     else if self.valueSensingTypes[self.intSelectedTypes] == "Motion and HeartRate" {
                         self.strStatus = stopMotionSensorUpdates()
@@ -165,7 +173,7 @@ struct ContentView: View {
                     }
                 })
                     {
-                    Text("Stop DAQ / Retrieve data")
+                    Text("Stop DAQ / Retrieve data & Send data")
                 }
                 
                 

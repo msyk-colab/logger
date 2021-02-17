@@ -14,6 +14,7 @@ func getDateTimeString() -> String{
     f.dateFormat = "yyyy_MMdd_HHmmss"
     let now = Date()
     return f.string(from: now)
+    //return f.string(from: dateDAQStarted)
 }
 
 func convertDateTimeString(now: Date) -> String{

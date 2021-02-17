@@ -48,7 +48,8 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         print("\(#function): activationState = \(session.activationState.rawValue)")
     }
     #endif
-    
+
+/*
     // Called when a file is received.
     //
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
@@ -57,15 +58,20 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         let docsDirect = paths[0]
         //let toURL = docsDirect.appendingPathComponent("DataFileRecievedFromWatch.m4a")
         let fileExtention = atURL.pathExtension
+        //(convertDateTimeString(now: dateDAQStarted))
+        //(convertDateTimeString(now: a))
+        //let toURL = docsDirect.appendingPathComponent("FileFromWatch"+(convertDateTimeString(now: dateDAQStarted))+"."+fileExtention)
         let toURL = docsDirect.appendingPathComponent("FileFromWatch"+getDateTimeString()+"."+fileExtention)
+        print("fileExtention",fileExtention)
         do {
          try FileManager.default.copyItem(at: atURL, to: toURL)
             print("Recieved file has been successfully copied under Documents folder.")
         }catch {
             print("Recieved file cannot be copied under Documents folder.")
         }
+        
     }
-    
+*/
     // Called when a file transfer is done.
     //
     func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
