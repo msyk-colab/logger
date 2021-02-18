@@ -43,7 +43,7 @@ struct ContentView: View {
     @State private var intSelectedInterval: Int = 0
     
     //Acceleration(recordAccelerometer)
-    var valueSensingDurations = [1, 2, 5, 10, 12, 30, 60, 120, 240, 480, 720]
+    var valueSensingDurations = [1, 2, 5, 10, 12, 30, 60, 120, 240, 360, 480, 600, 720]
     @State private var intSelectedDuration: Int = 0
     
     //workout
@@ -204,13 +204,46 @@ struct ContentView: View {
                     {
                     Text("Send audio file")
                 }
-/*
+                
+                Group{
                 Button(action:{
-                    self.strStatus = getsend720(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
+                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                 })
                     {
-                    Text("getsend720")
+                    Text("from \(convertDateTimeString(now: dateDAQStarted))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 120, to: dateDAQStarted)!))")
                 }
+                Button(action:{
+                    self.strStatus = four(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 120, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 240, to: dateDAQStarted)!))")
+                }
+                Button(action:{
+                    self.strStatus = six(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 240, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 360, to: dateDAQStarted)!))")
+                }
+                Button(action:{
+                    self.strStatus = eight(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 360, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 480, to: dateDAQStarted)!))")
+                }
+                Button(action:{
+                    self.strStatus = ten(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 480, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 600, to: dateDAQStarted)!))")
+                }
+                Button(action:{
+                    self.strStatus = twelve(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                })
+                    {
+                    Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 600, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 720, to: dateDAQStarted)!))")
+                }
+                }
+                /*
                 Button(action:{
                     self.strStatus = getsend12(durationMinutes: Double(self.valueSensingDurations[self.intSelectedDuration]))
                 })

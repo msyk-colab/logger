@@ -49,7 +49,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     }
     #endif
 
-
+/*
     // Called when a file is received.
     //
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
@@ -61,6 +61,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         //(convertDateTimeString(now: dateDAQStarted))
         //(convertDateTimeString(now: a))
         //let toURL = docsDirect.appendingPathComponent("FileFromWatch"+(convertDateTimeString(now: dateDAQStarted))+"."+fileExtention)
+        
         let toURL = docsDirect.appendingPathComponent("FileFromWatch"+getDateTimeString()+"."+fileExtention)
         print("fileExtention",fileExtention)
         do {
@@ -71,7 +72,8 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         }
         
     }
-
+*/
+    
     // Called when a file transfer is done.
     //
     func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {

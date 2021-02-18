@@ -315,7 +315,159 @@ func getSensorDataFileURL() -> URL{
     return fileURL
 }
 
-/*
+
+func two(intervalSeconds: Double)->String {
+    dateDAQEnded = Date()
+    var stringreturn = "Acceleration data retrieve failed"
+    for i in stride(from: 10, to: 130, by: 10) {
+        a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
+        b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+        print("i: \(i)")
+        print("a: \(a)")
+        print("b: \(b)")
+        
+        //
+        if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+            //with interval \(intervalSeconds) sec"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
+            creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+            //for (index, data) in (listCMSensorData.enumerated())
+            for (data) in (listCMSensorData) {
+                let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                appendDataToFile(string: stringData, fileurl: fileURL)
+            }
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+        }
+    }
+    return stringreturn
+}
+func four(intervalSeconds: Double)->String {
+    dateDAQEnded = Date()
+    var stringreturn = "Acceleration data retrieve failed"
+    for i in stride(from: 130, to: 250, by: 10) {
+        a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
+        b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+        if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+            //with interval \(intervalSeconds) sec"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
+            creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+            //for (index, data) in (listCMSensorData.enumerated())
+            for (data) in (listCMSensorData) {
+                let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                appendDataToFile(string: stringData, fileurl: fileURL)
+            }
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+        }
+    }
+    return stringreturn
+}
+func six(intervalSeconds: Double)->String {
+    dateDAQEnded = Date()
+    var stringreturn = "Acceleration data retrieve failed"
+    for i in stride(from: 250, to: 370, by: 10) {
+        a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
+        b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+        if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+            //with interval \(intervalSeconds) sec"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
+            creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+            //for (index, data) in (listCMSensorData.enumerated())
+            for (data) in (listCMSensorData) {
+                let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                appendDataToFile(string: stringData, fileurl: fileURL)
+            }
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+        }
+    }
+    return stringreturn
+}
+func eight(intervalSeconds: Double)->String {
+    dateDAQEnded = Date()
+    var stringreturn = "Acceleration data retrieve failed"
+    for i in stride(from: 370, to: 490, by: 10) {
+        a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
+        b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+        if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+            //with interval \(intervalSeconds) sec"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
+            creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+            //for (index, data) in (listCMSensorData.enumerated())
+            for (data) in (listCMSensorData) {
+                let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                appendDataToFile(string: stringData, fileurl: fileURL)
+            }
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+        }
+    }
+    return stringreturn
+}
+func ten(intervalSeconds: Double)->String {
+    dateDAQEnded = Date()
+    var stringreturn = "Acceleration data retrieve failed"
+    for i in stride(from: 490, to: 610, by: 10) {
+        a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
+        b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+        if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+            //with interval \(intervalSeconds) sec"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
+            creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+            //for (index, data) in (listCMSensorData.enumerated())
+            for (data) in (listCMSensorData) {
+                let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                appendDataToFile(string: stringData, fileurl: fileURL)
+            }
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+        }
+    }
+    return stringreturn
+}
+func twelve(intervalSeconds: Double)->String {
+    dateDAQEnded = Date()
+    var stringreturn = "Acceleration data retrieve failed"
+    for i in stride(from: 610, to: 730, by: 10) {
+        a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
+        b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+        if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
+            //with interval \(intervalSeconds) sec"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
+            creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
+            //for (index, data) in (listCMSensorData.enumerated())
+            for (data) in (listCMSensorData) {
+                let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
+                appendDataToFile(string: stringData, fileurl: fileURL)
+            }
+            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+        }
+    }
+    return stringreturn
+}
+
+
+
 // Called when a file is received.
 //
 func session(_ session: WCSession, didReceive file: WCSessionFile) {
@@ -337,4 +489,4 @@ func session(_ session: WCSession, didReceive file: WCSessionFile) {
     }
     
 }
-*/
+
