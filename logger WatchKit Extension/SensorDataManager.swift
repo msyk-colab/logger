@@ -467,9 +467,9 @@ func twelve(intervalSeconds: Double)->String {
 }
 
 
-
+/*
 // Called when a file is received.
-//
+//20210218ここじゃだめ
 func session(_ session: WCSession, didReceive file: WCSessionFile) {
     let atURL = file.fileURL
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -489,4 +489,4 @@ func session(_ session: WCSession, didReceive file: WCSessionFile) {
     }
     
 }
-
+*/

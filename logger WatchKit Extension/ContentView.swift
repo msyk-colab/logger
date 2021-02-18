@@ -210,7 +210,7 @@ struct ContentView: View {
                     self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                 })
                     {
-                    Text("from \(convertDateTimeString(now: dateDAQStarted))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 120, to: dateDAQStarted)!))")
+                    Text("from \(convertDateTimeString(now: dateDAQStarted))\nto\n\(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 120, to: dateDAQStarted)!))")
                 }
                 Button(action:{
                     self.strStatus = four(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])

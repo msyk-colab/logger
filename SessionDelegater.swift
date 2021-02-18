@@ -49,7 +49,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     }
     #endif
 
-/*
+
     // Called when a file is received.
     //
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
@@ -72,7 +72,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         }
         
     }
-*/
+
     
     // Called when a file transfer is done.
     //
