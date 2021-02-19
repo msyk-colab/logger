@@ -60,9 +60,10 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         let fileExtention = atURL.pathExtension
         //(convertDateTimeString(now: dateDAQStarted))
         //(convertDateTimeString(now: a))
-        //let toURL = docsDirect.appendingPathComponent("FileFromWatch"+(convertDateTimeString(now: dateDAQStarted))+"."+fileExtention)
-        
-        let toURL = docsDirect.appendingPathComponent("FileFromWatch"+getDateTimeString()+"."+fileExtention)
+        //let toURL = docsDirect.appendingPathComponent("FileFromWatch"+(convertDateTimeString(now: a))+"."+fileExtention)
+        let toURL = docsDirect.appendingPathComponent("FileFromWatch"+getNumber(num:i)+"."+fileExtention)
+
+        //let toURL = docsDirect.appendingPathComponent("FileFromWatch"+getDateTimeString()+"."+fileExtention)
         print("fileExtention",fileExtention)
         do {
          try FileManager.default.copyItem(at: atURL, to: toURL)

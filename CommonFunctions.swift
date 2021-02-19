@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
-let sensorDataFileName = "SensorData.csv"
+var i = 0
+//let sensorDataFileName = "SensorData.csv"
 
 func getDateTimeString() -> String{
     let f = DateFormatter()
@@ -15,6 +15,11 @@ func getDateTimeString() -> String{
     let now = Date()
     return f.string(from: now)
     //return f.string(from: dateDAQStarted)
+}
+
+func getNumber(num: Int) ->String{
+    i = i + 1
+    return String(i)
 }
 
 func convertDateTimeString(now: Date) -> String{
