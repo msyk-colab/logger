@@ -21,7 +21,7 @@ var b = Date()
 var c: [String] = []
 var d = 1
 var e = 0
-var f = 0
+
 struct ContentView: View {
     /*
     // Get the business logic from the environment.
@@ -138,10 +138,7 @@ struct ContentView: View {
                         workoutSession.endWorkout()
                         workoutInProgress = false
                         print("Duration:",Double(self.valueSensingDurations[self.intSelectedDuration]))
-                        
-                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12{
-                            self.strStatus = getsend12(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
-                        }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
+                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
                             self.strStatus = getsend720(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 480{
                             self.strStatus = getsend480(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
@@ -154,10 +151,7 @@ struct ContentView: View {
                         print("Duration:",Double(self.valueSensingDurations[self.intSelectedDuration]))
                         
                         //self.strStatus = stopAccelerationSensorUpdates(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
-                    
-                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 12{
-                            self.strStatus = getsend12(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
-                        }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
+                        if Double(self.valueSensingDurations[self.intSelectedDuration]) == 720{
                             self.strStatus = getsend720(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                         }else if Double(self.valueSensingDurations[self.intSelectedDuration]) == 480{
                             self.strStatus = getsend480(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
@@ -243,13 +237,26 @@ struct ContentView: View {
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 480, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 600, to: dateDAQStarted)!))")
                 }
-                Button(action:{
+                    Button(action:{
                     e = 610
                     self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
                 })
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 600, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 720, to: dateDAQStarted)!))")
                 }
+                    Button(action:{
+                        self.strStatus = Accget(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]))
+                    })
+                        {
+                        Text("Accget")
+                    }
+                    Button(action:{
+                        self.strStatus = Accsend(durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]))
+                    })
+                        {
+                        Text("Accsend")
+                    }
+
                 }
                 /*
                 Button(action:{

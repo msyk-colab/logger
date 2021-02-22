@@ -7,7 +7,7 @@
 
 import Foundation
 var i = 0
-//let sensorDataFileName = "SensorData.csv"
+let sensorDataFileName = "SensorData.csv"
 
 func getDateTimeString() -> String{
     let f = DateFormatter()
