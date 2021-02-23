@@ -8,7 +8,7 @@ SessionDelegater implemments the WCSessionDelegate methods. Used on both iOS and
 
 import Foundation
 import WatchConnectivity
-
+//var sessionStatus: String = "status"
 /*
 #if os(watchOS)
 import ClockKit
@@ -61,7 +61,8 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         //(convertDateTimeString(now: dateDAQStarted))
         //(convertDateTimeString(now: a))
         //let toURL = docsDirect.appendingPathComponent("FileFromWatch"+(convertDateTimeString(now: a))+"."+fileExtention)
-        let toURL = docsDirect.appendingPathComponent("FileFromWatch"+getNumber(num:i)+"."+fileExtention)
+        
+        let toURL = docsDirect.appendingPathComponent("FromWatch"+TimeString()+getNumber(num:i)+"."+fileExtention)
 
         //let toURL = docsDirect.appendingPathComponent("FileFromWatch"+getDateTimeString()+"."+fileExtention)
         print("fileExtention",fileExtention)

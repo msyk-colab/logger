@@ -329,10 +329,11 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
             stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
             //with interval \(intervalSeconds) sec"
             print("stringreturn: \(stringreturn)")
-            let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
+            //let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
+            //let AccFileName = "10min from\(convertDateTimeString(now: a)).csv"
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docsDirect = paths[0]
-            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let fileURL = docsDirect.appendingPathComponent(tukuru)
             let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
             creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
             for (index, data)  in (listCMSensorData.enumerated()) {
@@ -351,10 +352,12 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
 func Accsend(durationMinutes: Int)->String{
     for i in stride(from:10, to: durationMinutes+10, by: 10){
         a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
-        let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
+        //let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
+        //let AccFileName = "10min from\(convertDateTimeString(now: a)).csv"
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let docsDirect = paths[0]
-        let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+        //let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
+        let fileURL = docsDirect.appendingPathComponent(okuru)
         WCSession.default.transferFile(fileURL, metadata: ["":""])
     }
     return "File transfer initiated."

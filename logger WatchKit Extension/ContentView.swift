@@ -202,6 +202,7 @@ struct ContentView: View {
                 }
                 
                 Group{
+/*
                 Button(action:{
                     e = 10
                     self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
@@ -244,6 +245,8 @@ struct ContentView: View {
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 600, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 720, to: dateDAQStarted)!))")
                 }
+*/
+                    
                     Button(action:{
                         self.strStatus = Accget(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]))
                     })
@@ -334,7 +337,7 @@ struct ContentView: View {
         return "Play audio finished."
     }
     
-    //3
+    //sensor
     func fileTransfer(fileURL: URL, metaData: [String:String])->String{
         WCSession.default.transferFile(fileURL, metadata: metaData)
         return "File transfer initiated."
