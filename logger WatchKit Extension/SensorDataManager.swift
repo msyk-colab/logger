@@ -301,6 +301,7 @@ func two(intervalSeconds: Double)->String {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docsDirect = paths[0]
             let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            //let fileURL = docsDirect.appendingPathComponent(tukuru)
             let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
             creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
                 //for (index, data) in (listCMSensorData.enumerated())
@@ -328,12 +329,15 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
         if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
             stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
             //with interval \(intervalSeconds) sec"
-            print("stringreturn: \(stringreturn)")
             //let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
             //let AccFileName = "10min from\(convertDateTimeString(now: a)).csv"
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docsDirect = paths[0]
-            let fileURL = docsDirect.appendingPathComponent(tukuru)
+            //1
+            //let fileURL = docsDirect.appendingPathComponent(tukuru)
+            //let fileURL = docsDirect.appendingPathComponent("10min from\(convertDateTimeString(now: a)).csv")
+            let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
+            //let fileURL = docsDirect.appendingPathComponent(tukuru)
             let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
             creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
             for (index, data)  in (listCMSensorData.enumerated()) {
@@ -342,11 +346,16 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
                 //print(index, data)
             }
             stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n"
-            //fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+            //2
+            //let fileURL2 = docsDirect.appendingPathComponent(okuru)
+            //WCSession.default.transferFile(fileURL2, metadata: ["":""])
+            fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
             //print("stringreturn: \(stringreturn)")
+            //WCSession.default.transferFile(fileURL, metadata: ["":""])
             }
         }
-        return stringreturn
+    print("stringreturn: \(stringreturn)")
+    return stringreturn
 }
 
 func Accsend(durationMinutes: Int)->String{
@@ -356,8 +365,8 @@ func Accsend(durationMinutes: Int)->String{
         //let AccFileName = "10min from\(convertDateTimeString(now: a)).csv"
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let docsDirect = paths[0]
-        //let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
-        let fileURL = docsDirect.appendingPathComponent(okuru)
+        let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
+        //let fileURL = docsDirect.appendingPathComponent(okuru)
         WCSession.default.transferFile(fileURL, metadata: ["":""])
     }
     return "File transfer initiated."
