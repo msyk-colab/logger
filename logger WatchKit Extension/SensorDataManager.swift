@@ -247,6 +247,7 @@ func creatDataFile(onetimestring: String, fileurl: URL){
     if FileManager.default.fileExists(atPath: fileurl.path) {
       do {
         try FileManager.default.removeItem(atPath: fileurl.path)
+        print("file removeItem success")
       } catch {
         print("Existing sensor data file cannot be deleted.")
       }
@@ -335,8 +336,10 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
             let docsDirect = paths[0]
             //1
             //let fileURL = docsDirect.appendingPathComponent(tukuru)
-            //let fileURL = docsDirect.appendingPathComponent("10min from\(convertDateTimeString(now: a)).csv")
-            let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
+            //let fileURL = docsDirect.appendingPathComponent("10min from"+convertDateTimeString(now: a)+".csv")
+            let fileURL = docsDirect.appendingPathComponent("10min from"+getNumber4(num:e)+".csv")
+            
+            //let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
             //let fileURL = docsDirect.appendingPathComponent(tukuru)
             let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
             creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
@@ -349,7 +352,8 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
             //2
             //let fileURL2 = docsDirect.appendingPathComponent(okuru)
             //WCSession.default.transferFile(fileURL2, metadata: ["":""])
-            fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+            //fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+            fileTransfer(fileURL: fileURL, metaData: ["":""])
             //print("stringreturn: \(stringreturn)")
             //WCSession.default.transferFile(fileURL, metadata: ["":""])
             }
@@ -372,7 +376,10 @@ func Accsend(durationMinutes: Int)->String{
     return "File transfer initiated."
 }
 
-
+func getNumber4(num: Int) ->String{
+    e = e + 1
+    return String(e)
+}
 /*
 // Called when a file is received.
 //20210218ここじゃだめ

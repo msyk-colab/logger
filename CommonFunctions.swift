@@ -16,7 +16,7 @@ func TimeString() -> String{
     let date = Date()
     let df = DateFormatter()
     df.locale = Locale(identifier: "ja_JP")
-    df.dateFormat = "yyyyMMdd_"
+    df.dateFormat = "MMdd_"
     return df.string(from: date)
 }
 func getNumber2(num: Int) ->String{
