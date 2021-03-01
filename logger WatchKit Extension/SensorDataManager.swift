@@ -400,7 +400,7 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
                     appendDataToFile(string: stringData, fileurl: fileURL)
                 //print(index, data)
             }
-                stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n" + fileTransfer(fileURL: fileURL, metaData: ["":""])
+                stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n"
             //2
             //let fileURL2 = docsDirect.appendingPathComponent(okuru)
             //WCSession.default.transferFile(fileURL2, metadata: ["":""])
@@ -431,7 +431,7 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
     return stringreturn
 }
 
-
+/*
 func Accsend(durationMinutes: Int)->String{
     var stringreturn = "Acceleration data  send failed"
     for i in stride(from:10, to: durationMinutes+10, by: 10){
@@ -446,6 +446,25 @@ func Accsend(durationMinutes: Int)->String{
         stringreturn = "10min from \(convertDateTimeString(now: dateDAQStarted))\nto \(convertDateTimeString(now: f))\n" + fileTransfer(fileURL: fileURL, metaData: ["":""])
         //WCSession.default.transferFile(fileURL, metadata: ["":""])
     }
+    return stringreturn
+}
+*/
+
+func Accsend(durationMinutes: Int)->String{
+    var stringreturn = "Acceleration data  send "
+    for i in stride(from:10, to: durationMinutes+10, by: 10){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30.0){
+            f = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+        //let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
+        //let AccFileName = "10min from\(convertDateTimeString(now: a)).csv"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docsDirect = paths[0]
+            let fileURL = docsDirect.appendingPathComponent("10min from"+getNumber5(num:e)+".csv")
+        //let fileURL = docsDirect.appendingPathComponent("SensorData.csv")
+        //let fileURL = docsDirect.appendingPathComponent(okuru)
+            stringreturn = "10min from \(convertDateTimeString(now: dateDAQStarted))\nto \(convertDateTimeString(now: f))\n" + fileTransfer(fileURL: fileURL, metaData: ["":""])
+        //WCSession.default.transferFile(fileURL, metadata: ["":""])
+        }}
     return stringreturn
 }
 
