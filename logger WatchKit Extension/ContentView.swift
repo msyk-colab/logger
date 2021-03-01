@@ -21,6 +21,7 @@ var b = Date()
 var c: [String] = []
 var d = 1
 var e = 0
+var f = Date()
 
 struct ContentView: View {
     /*
@@ -370,6 +371,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
+            ContentView(workoutSession: WorkoutManager())
             ContentView(workoutSession: WorkoutManager())
             ContentView(workoutSession: WorkoutManager())
         }
