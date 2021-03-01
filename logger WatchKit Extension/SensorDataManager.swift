@@ -366,17 +366,19 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
 */
 
 func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
-    var stringreturn = "Acceleration data retrieve failed"
     dateDAQEnded = Date()
+    //var stringreturn = "Acceleration data retrieve failed"
+    var stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \ndurationMinutes:" + String(durationMinutes)
+    
     print("durationMinutes: \(durationMinutes)")
     for i in stride(from:10, to: durationMinutes+10, by: 10){
-        a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
-        b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
-        print("i: \(i)")
-        print("a: \(a)")
-        print("b: \(b)")
-        if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 30.0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30.0){
+            a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
+            b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
+            print("i: \(i)")
+            print("a: \(a)")
+            print("b: \(b)")
+            if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
                 stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
             //with interval \(intervalSeconds) sec"
             //let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
@@ -409,27 +411,26 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
             
                 //まつ
                 
-            }
+            
             
             //けす
             /*
             if FileManager.default.fileExists(atPath: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("10min from"+getNumber5(num:e)+".csv").path) {
               do {
-                try FileManager.default.removeItem(atPath: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("10min from"+getNumber5(num:e)+".csv").path)
-                print("file removeItem success")
-              } catch {
-                print("Existing sensor data file cannot be deleted.")
-              }
+                     try FileManager.default.removeItem(atPath: fileurl.path)
+                     print("file removeItem success")
+                   } catch {
+                     print("Existing sensor data file cannot be deleted.")
+                   }
+                 }
+*/
             }
-            */
-            
-            
-            
-            }
-        }
+    }
+    }
     print("stringreturn: \(stringreturn)")
     return stringreturn
 }
+
 
 func Accsend(durationMinutes: Int)->String{
     var stringreturn = "Acceleration data  send failed"
