@@ -203,50 +203,50 @@ struct ContentView: View {
                 }
                 
                 Group{
-/*
+
                 Button(action:{
-                    e = 10
-                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    //e = 10
+                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]),e:10)
                 })
                     {
                     Text("from \(convertDateTimeString(now: dateDAQStarted))\nto\n\(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 120, to: dateDAQStarted)!))")
                 }
                 Button(action:{
-                    e = 130
-                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    //e = 130
+                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]),e:130)
                 })
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 120, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 240, to: dateDAQStarted)!))")
                 }
                 Button(action:{
-                    e = 250
-                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    //e = 250
+                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]),e:250)
                 })
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 240, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 360, to: dateDAQStarted)!))")
                 }
                 Button(action:{
-                    e = 370
-                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    //e = 370
+                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]),e:370)
                 })
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 360, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 480, to: dateDAQStarted)!))")
                 }
                 Button(action:{
-                    e = 490
-                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    //e = 490
+                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]),e:490)
                 })
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 480, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 600, to: dateDAQStarted)!))")
                 }
                     Button(action:{
-                    e = 610
-                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval])
+                    //e = 610
+                    self.strStatus = two(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]),e:610)
                 })
                     {
                     Text("from \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 600, to: dateDAQStarted)!))\nto \(convertDateTimeString(now: Calendar.current.date(byAdding: .minute, value: 720, to: dateDAQStarted)!))")
                 }
-*/
+
                     
                     Button(action:{
                         self.strStatus = Accget(intervalSeconds: self.valueSensingIntervals[self.intSelectedInterval],durationMinutes: Int(self.valueSensingDurations[self.intSelectedDuration]))

@@ -36,7 +36,7 @@ func startAccelerationSensorUpdates(durationMinutes: Double)->String{
     var stringreturn = "Acceleration DAQ failed."
     if CMSensorRecorder.isAccelerometerRecordingAvailable() {
         sensorrecorder.recordAccelerometer(forDuration: durationMinutes * 60)
-        stringreturn = "Acceleration DAQ started at \n\(convertDateTimeString(now: dateDAQStarted)) \nfor \(durationMinutes) min"
+        stringreturn = "Acceleration DAQ started at \n\(convertDateTimeString(now: dateDAQStarted)) \n for \(durationMinutes) min"
     }
     return stringreturn
 }
@@ -286,7 +286,7 @@ func getSensorDataFileURL() -> URL{
 }
 
 
-func two(intervalSeconds: Double)->String {
+func two(intervalSeconds: Double, durationMinutes: Int, e: Int)->String {
     dateDAQEnded = Date()
     var stringreturn = "Acceleration data retrieve failed"
     for i in stride(from: e, to: e+120, by: 10) {
@@ -298,10 +298,10 @@ func two(intervalSeconds: Double)->String {
         if let listCMSensorData = sensorrecorder.accelerometerData(from: a, to: b){
             stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: a)) \nto\(convertDateTimeString(now: b))"
             //with interval \(intervalSeconds) sec"
-            let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
+            //let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docsDirect = paths[0]
-            let fileURL = docsDirect.appendingPathComponent(sensorDataFileName)
+            let fileURL = docsDirect.appendingPathComponent("10min from"+getNumber4(num:e)+".csv")
             //let fileURL = docsDirect.appendingPathComponent(tukuru)
             let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
             creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
@@ -310,11 +310,20 @@ func two(intervalSeconds: Double)->String {
                 let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
                 appendDataToFile(string: stringData, fileurl: fileURL)
             }
-            stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n"
-            fileTransfer(fileURL: getSensorDataFileURL(), metaData: ["":""])
+            //stringreturn = "Acceleration data retrieved \nfrom \(convertDateTimeString(now: dateDAQStarted)) \nto\(convertDateTimeString(now: b))\n"
+            fileTransfer2(fileURL: getSensorDataFileURL2(), metaData: ["":""])
         }
 }
     return stringreturn
+}
+func fileTransfer2(fileURL: URL, metaData: [String:String]){
+    WCSession.default.transferFile(fileURL, metadata: metaData)
+}
+func getSensorDataFileURL2() -> URL{
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let docsDirect = paths[0]
+    let fileURL = docsDirect.appendingPathComponent("10min from"+getNumber5(num:e)+".csv")
+    return fileURL
 }
 /*
 func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
@@ -372,7 +381,7 @@ func Accget(intervalSeconds: Double, durationMinutes: Int)->String {
     
     print("durationMinutes: \(durationMinutes)")
     for i in stride(from:10, to: durationMinutes+10, by: 10){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 30.0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0){
             a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
             b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
             print("i: \(i)")
@@ -453,7 +462,7 @@ func Accsend(durationMinutes: Int)->String{
 func Accsend(durationMinutes: Int)->String{
     var stringreturn = "Acceleration data  send "
     for i in stride(from:10, to: durationMinutes+10, by: 10){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 30.0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0){
             f = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
         //let sensorDataFileName = "10min from\(convertDateTimeString(now: a)).csv"
         //let AccFileName = "10min from\(convertDateTimeString(now: a)).csv"
