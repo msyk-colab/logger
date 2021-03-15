@@ -289,7 +289,7 @@ func getSensorDataFileURL() -> URL{
 func two(intervalSeconds: Double, durationMinutes: Int, e: Int)->String {
     dateDAQEnded = Date()
     var stringreturn = "Acceleration data retrieve failed"
-    for i in stride(from: e, to: e+120, by: 10) {
+    for i in stride(from: e, to: e+60, by: 10) {
         a = Calendar.current.date(byAdding: .minute, value: i-10, to: dateDAQStarted)!
         b = Calendar.current.date(byAdding: .minute, value: i, to: dateDAQStarted)!
         //print("i: \(i)")
@@ -306,7 +306,7 @@ func two(intervalSeconds: Double, durationMinutes: Int, e: Int)->String {
             let stringfirstline = "\(convertDateTimeString(now: a)),\(convertDateTimeString(now: b))\nTimestamp,AxelX,AxelY,AxelZ\n"
             creatDataFile(onetimestring: stringfirstline, fileurl: fileURL)
                 //for (index, data) in (listCMSensorData.enumerated())
-            for (data) in (listCMSensorData.enumerated()) {
+            for (index, data) in (listCMSensorData.enumerated()) {
                 let stringData = "\((data as AnyObject).timestamp!),\((data as AnyObject).acceleration.x),\((data as AnyObject).acceleration.y),\((data as AnyObject).acceleration.z)\n"
                 appendDataToFile(string: stringData, fileurl: fileURL)
             }
@@ -506,5 +506,37 @@ func session(_ session: WCSession, didReceive file: WCSessionFile) {
         print("Recieved file cannot be copied under Documents folder.")
     }
     
+}
+*/
+/*
+let recorder = CMSensorRecorder()
+//@IBAction
+func recordAcceleration() {
+    if CMSensorRecorder.isAccelerometerRecordingAvailable() {
+        print("recorder started")
+        DispatchQueue.global(qos: .background).async {
+            self.recorder.recordAccelerometer(forDuration: 30)
+        }
+        perform(#selector(callback), with: nil, afterDelay: 1 * 60)
+    }
+}
+//@objc
+func callback(){
+    DispatchQueue.global(qos: .background).async {getData()}
+}
+func getData(){
+    print("getData started")
+    if let list = recorder.accelerometerData(from: Date(timeIntervalSinceNow: -60), to: Date()) {
+        print("listing data")
+        for data in list{
+            if let accData = data as? CMRecordedAccelerometerData{
+                let accX = accData.acceleration.x
+                let timestamp = accData.startDate
+                //Do something here.
+                print(accX)
+                print(timestamp)
+            }
+        }
+    }
 }
 */
